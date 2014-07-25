@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Listum</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+<div ng-app ng-controller="TodoCtrl">
+  <div ng-controller="TodoCtrl">    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 jumbotron">
+            <input id="new-todo" type="text" ng-model="todoText"  size="30"
+            placeholder="New Item" ng-keyup="addTodo()" class="form-control"/><br>
+            <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{actualProgress()}}%;">
+                      <span class="sr-only">60% Complete</span>
+                    </div>
+                  </div>
+                <div class="todo-count">{{remaining()}} / {{todos.length}}</div>
+                  <a id="clear-completed" ng-click="clear()" ng-show="hasDone()">
+                      Clear <span >{{(todos.length - remaining())}} {{itemText()}}</span>.
+                  </a> <br>
+                  <input id="toggle-all" type="checkbox" ng-model="markAll"
+                  ng-click="toggleMarkAll()"/>
+                  <label for="toggle-all">Complete All</label>
+                  
+              </div>
+          <div class="col-md-6 jumbotron">
+            <section id="main" style="display: block;">
+              <h1>List</h1>
+              <div ng-show="isTodo()">
+                
+              </div>
+              <ul id="todo-list" class="unstyled">
+                <li ng-repeat="todo in todos" ng-dblclick="toggleEditMode()">
+                  <div class="view" ng-keyup="editTodo()">
+                    <input type="checkbox" ng-model="todo.done"/>
+                    <span class="done-{{todo.done}}" >{{todo.text}}</span>
+                  </div>
+                  <input class="edit" type="text" ng-model="todo.text"
+                    ng-keyup="editOnEnter(todo)"/>
+                </li>
+              </ul>
+            </section>
+          </div>
+      </div>
+</div>
+
+
+
+         
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="nguiboot.min.js"></script>
+<script src="app.js"></script> 
+  </body>  
+</html>
